@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "TabVault"
+description = "A privacy-first Chromium extension for saving, organizing, searching, and restoring local browser tab workspaces."
+version = "1.0.0"
+id = "artifacts/tabvault"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25180
+
+[services.development]
+run = "pnpm --filter @workspace/tabvault run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/tabvault", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/tabvault/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25180"
+BASE_PATH = "/"
