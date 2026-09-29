@@ -2,7 +2,6 @@ services:
   - type: web
     name: tabvault
     runtime: static
-    plan: free
     buildCommand: pnpm install --frozen-lockfile && pnpm run build:render
     staticPublishPath: ./artifacts/tabvault/dist/public
     routes:
